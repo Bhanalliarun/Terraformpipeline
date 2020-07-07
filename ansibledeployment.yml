@@ -1,0 +1,46 @@
+---
+- hosts: all
+  become: yes
+  become_user: ubuntu
+  tasks:
+    - name: Run kubernetes deployment command.
+      command: kubectl apply --kubeconfig /home/ubuntu/admin.conf -f /home/ubuntu/deployment.yml
+      args:
+        chdir: /home/ubuntu
+    - name: Sleep 10 seconds
+      command:  sleep 10
+
+    - name: Display deployment details.
+      command: kubectl get deployments --kubeconfig /home/ubuntu/admin.conf
+   
+    - name: Display service details.
+      command: kubectl get svc --kubeconfig /home/ubuntu/admin.conf
+   
+    - name: Clone monitoring scripts
+      git:
+        repo: https://github.com/kishorsg/e2epipeline.git
+        dest: /home/ubuntu/e2epipeline
+       
+    - name: Change permission of files and folders.
+      command: chmod 777 -R /home/ubuntu/e2epipeline
+        
+    - name: Configuring Prometheus  
+      shell: /home/ubuntu/e2epipeline/monitoring/prometheus.sh
+      args:
+        chdir: /home/ubuntu/e2epipeline/monitoring
+
+    - name: Sleep 20 seconds
+      command:  sleep 20   
+    
+    - name: Configuring Grafana  
+      shell: /home/ubuntu/e2epipeline/monitoring/grafana.sh
+      args:
+        chdir: /home/ubuntu/e2epipeline/monitoring
+    
+    - name: Sleep 20 seconds
+      command:  sleep 20   
+    
+    - name: Configuring Kube State Metrics
+      shell: /home/ubuntu/e2epipeline/metrics/metrics.sh
+      args:
+        chdir: /home/ubuntu/e2epipeline/metrics

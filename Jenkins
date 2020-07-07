@@ -9,12 +9,12 @@ node {
         sh "${mvnCMD} clean install"
     }
     
-    /* stage('SonarQube Analysis') {
+    stage('SonarQube Analysis') {
        def mvnHome =  tool name: 'Maven', type: 'maven'
-        withSonarQubeEnv('sonar') { 
-        sh "${mvnHome}/bin/mvn sonar:sonar"
+       withSonarQubeEnv('sonar') { 
+       sh "${mvnHome}/bin/mvn sonar:sonar"
        }
-    } */
+    } 
     
     stage('Build Docker Image'){
         sh 'docker build -t bhanalliarun/my-k8s:2.0.0 .'

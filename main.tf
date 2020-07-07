@@ -252,7 +252,7 @@ resource "null_resource" "download_kubeconfig_file" {
     scp ubuntu@${aws_eip.master.public_ip}:/home/ubuntu/admin.conf ${local.kubeconfig_file} >/dev/null
     
   # copy deployment file from local to new instance
-    scp /var/lib/jenkins/workspace/e2epipeline/deployment.yml ubuntu@${aws_eip.master.public_ip}:/home/ubuntu
+    scp /var/lib/jenkins/workspace/Terraformpipeline/deployment.yml ubuntu@${aws_eip.master.public_ip}:/home/ubuntu
 
     EOF
   }

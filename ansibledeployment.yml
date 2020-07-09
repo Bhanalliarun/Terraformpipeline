@@ -18,29 +18,29 @@
    
     - name: Clone monitoring scripts
       git:
-        repo: https://github.com/kishorsg/e2epipeline.git
-        dest: /home/ubuntu/e2epipeline
+        repo: https://github.com/Bhanalliarun/Terraformpipeline.git
+        dest: /home/ubuntu/Terraformpipeline
        
     - name: Change permission of files and folders.
-      command: chmod 777 -R /home/ubuntu/e2epipeline
+      command: chmod 777 -R /home/ubuntu/Terraformpipeline
         
     - name: Configuring Prometheus  
-      shell: /home/ubuntu/e2epipeline/monitoring/prometheus.sh
+      shell: /home/ubuntu/Terraformpipeline/monitoring/prometheus.sh
       args:
-        chdir: /home/ubuntu/e2epipeline/monitoring
+        chdir: /home/ubuntu/Terraformpipeline/monitoring
 
     - name: Sleep 20 seconds
       command:  sleep 20   
     
     - name: Configuring Grafana  
-      shell: /home/ubuntu/e2epipeline/monitoring/grafana.sh
+      shell: /home/ubuntu/Terraformpipeline/monitoring/grafana.sh
       args:
-        chdir: /home/ubuntu/e2epipeline/monitoring
+        chdir: /home/ubuntu/Terraformpipeline/monitoring
     
     - name: Sleep 20 seconds
       command:  sleep 20   
     
     - name: Configuring Kube State Metrics
-      shell: /home/ubuntu/e2epipeline/metrics/metrics.sh
+      shell: /home/ubuntu/Terraformpipeline/metrics/metrics.sh
       args:
-        chdir: /home/ubuntu/e2epipeline/metrics
+        chdir: /home/ubuntu/Terraformpipeline/metrics

@@ -16,31 +16,4 @@
     - name: Display service details.
       command: kubectl get svc --kubeconfig /home/ubuntu/admin.conf
    
-    - name: Clone monitoring scripts
-      git:
-        repo: https://github.com/Bhanalliarun/Terraformpipeline.git
-        dest: /home/ubuntu/Terraformpipeline
-       
-    - name: Change permission of files and folders.
-      command: chmod 777 -R /home/ubuntu/Terraformpipeline
-        
-    - name: Configuring Prometheus  
-      shell: /home/ubuntu/Terraformpipeline/monitoring/prometheus.sh
-      args:
-        chdir: /home/ubuntu/Terraformpipeline/monitoring
-
-    - name: Sleep 20 seconds
-      command:  sleep 20   
-    
-    - name: Configuring Grafana  
-      shell: /home/ubuntu/Terraformpipeline/monitoring/grafana.sh
-      args:
-        chdir: /home/ubuntu/Terraformpipeline/monitoring
-    
-    - name: Sleep 20 seconds
-      command:  sleep 20   
-    
-    - name: Configuring Kube State Metrics
-      shell: /home/ubuntu/Terraformpipeline/metrics/metrics.sh
-      args:
-        chdir: /home/ubuntu/Terraformpipeline/metrics
+   

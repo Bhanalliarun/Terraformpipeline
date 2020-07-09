@@ -177,7 +177,7 @@ resource "aws_instance" "master" {
 resource "null_resource" "cretae_host_file" {
   provisioner "local-exec" {
     command = <<-EOF
-    echo "${aws_eip.master.public_ip}" | tee /home/ubuntu/hosts
+    echo "${aws_eip.master.public_ip}" | sudo tee /home/ubuntu/hosts
     EOF
   }
 }

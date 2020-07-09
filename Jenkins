@@ -24,7 +24,7 @@ node {
         {
         sh "docker login -u bhanalliarun -p ${docker}"
         }
-        sh 'docker push bhanalliarun/my-k8s:2.0.0'
+        sh 'docker push bhanalliarun/my-terra:2.0.0'
     }
  
     stage ('Infracture Provision') {

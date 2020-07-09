@@ -17,7 +17,7 @@ node {
     } 
     
     stage('Build Docker Image'){
-        sh 'docker build -t bhanalliarun/my-k8s:2.0.0 .'
+        sh 'docker build -t bhanalliarun/my-terra:2.0.0 .'
     }
     stage('Push Docker Image'){
         withCredentials([string(credentialsId: 'dockerpwd', variable: 'docker')])

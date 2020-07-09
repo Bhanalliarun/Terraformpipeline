@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: kubeadam-ctr
-        image: bhanalliarun/my-k8s:2.0.0
+        image: bhanalliarun/my-terra:2.0.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
 

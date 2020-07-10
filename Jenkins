@@ -8,14 +8,14 @@ node {
         def mvnCMD = "${mvnHome}/bin/mvn"
         sh "${mvnCMD} clean install"
     }
-    
+    /*
     stage('SonarQube Analysis') {
        def mvnHome =  tool name: 'Maven', type: 'maven'
        withSonarQubeEnv('sonar') { 
        sh "${mvnHome}/bin/mvn sonar:sonar"
        }
     } 
-    
+    */
     stage('Build Docker Image'){
         sh 'docker build -t bhanalliarun/my-terra:2.0.0 .'
     }
@@ -26,7 +26,7 @@ node {
         }
         sh 'docker push bhanalliarun/my-terra:2.0.0'
     }
- 
+    
     stage ('Infracture Provision') {
         print 'Provision of infrastructure from Terraform'
         withCredentials([string(credentialsId: 'aws-access-key', variable: 'AWS_ACCESS_KEY_ID'),
@@ -46,10 +46,10 @@ node {
         print 'Deployment through ansible'
         sh '''
          pwd
-        ansible-playbook -i /home/ubuntu/hosts -u ubuntu ansibledeployment.yml -v      
+        ansible-playbook -i /home/ubuntu/hosts -u ubuntu --private-key=/var/lib/jenkins/.ssh/id_rsa ansibledeployment.yml -v      
           '''
     }  
-     
+    
    input 'Click on Proceed to destroy infrastructure!!' 
     
     stage ('Terraform Destroy') {
@@ -62,5 +62,4 @@ node {
           '''
                       }
     } 
-}    
-
+}   
